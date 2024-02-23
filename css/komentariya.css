@@ -1,0 +1,83 @@
+@import "profile.css";
+.komentariya {
+  margin-left: 78px;
+  padding-top: 50px;
+}
+
+.container_komentariya {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  }
+.tbl-header {
+  background-color: rgba(129, 0, 65, 0.3);
+}
+.tbl-content {
+  height: 600px;
+  overflow-x: auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+th {
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 18px;
+  color: #6E0666;
+  text-transform: uppercase;
+}
+td {
+  width: 200px;
+  padding: 15px;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: 600;
+  font-size: 14px;
+  color: #000000;
+  border: solid 1px rgba(0, 0, 0, 0.4);
+  background: palegreen;
+}
+.koment {
+  width: 100%;
+  max-width: 600px;
+  margin-left: 500px;
+  padding-top: 100px;
+}
+
+.koment_content{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 10px;
+}
+
+.koment_content h3 {
+  font-size: 16px;
+  font-weight: normal;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.koment_content p{
+  font-size: 16px;
+  font-weight: normal;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.koment_content img {
+  border-radius: 20px;
+  width: 350px;
+}
+
+.koment_content video {
+  border-radius: 20px;
+  width: 350px;
+}

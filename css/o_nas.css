@@ -1,0 +1,399 @@
+@import 'style.css';
+@import 'normalize.css';
+
+.section_info {
+    margin-top: 30px;
+    padding: 50px 0 15px;
+}
+
+
+.section_info_title {
+    font-size: 36px;
+    color: #080808;
+    font-weight: 800;
+}
+
+.info_content p{
+    font-family: 'Montserrat';
+    font-size: 16px;
+    color: black;
+    text-align: left;
+    line-height: 2;
+}
+
+.info_content_img{
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+}
+.info_content_img img {
+    width:100%;
+    max-width: 600px;
+    border: 4px solid white;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.info_content_img_food {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.info_content_img_food img {
+    width:100%;
+    max-width: 598px;
+    border: 4px solid white;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+.modal_img_content {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin:60px auto 0;
+    color: #000;
+    border-radius: 16px;
+    cursor: default;
+}
+
+.modal_img_content img {
+    width: 100%;
+    max-width: 1000px;
+    border-radius: 16px;
+}
+
+.modal__close_img {
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    outline: 1px solid transparent;
+    outline-offset: 3px;
+    transition: outline-color .15s ease-in-out;
+    border-radius: 3px;
+    padding: 0;
+    text-align: center;
+    display: block;
+    width: 30px;
+    height: 30px;
+}
+
+.section_kontact {
+    margin-top: 30px;
+    padding: 50px 0 15px;
+}
+
+
+.section_kontact_title {
+    font-size: 36px;
+    color: #080808;
+    font-weight: 800;
+}
+
+.kontact_content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.kontact_content ul {
+    list-style: none;
+}
+
+.kontact_content_title {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.kontact_content_subtitle {
+    font-size: 16px;
+}
+
+.kontact_content_subtitle a {
+    font-size: 16px;
+    color: #080808;
+    transition: color .2s linear;
+}
+
+.kontact_content_subtitle a:hover {
+    text-decoration: none;
+    color: rgb(214, 51, 51);
+}
+
+
+.kontact_content_time {
+    padding-left: 20px;
+    font-size: 16px;
+}
+
+
+.section_sostav {
+    margin-top: 30px;
+    padding: 50px 0 15px;
+}
+
+
+.section_sostav_title {
+    font-size: 36px;
+    color: #080808;
+    font-weight: 800;
+}
+
+
+.sostav_text_content p {
+    text-align: left;
+    font-size: 16px;
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1;
+}
+
+.accordion {
+    width: 100%;
+    background: none;
+    color: #000000;
+    cursor: pointer;
+    padding: 20px 15px 20px 20px;
+    border: 2px solid rgb(71, 71, 71);
+    border-radius: 25px;
+    margin-left: 5px;
+    text-align: left;
+    outline: none;
+    font-size: 20px;
+    font-weight: 700;
+    transition: 0.1s;
+    margin-top: 20px;
+}
+
+.accordion_pizza{
+    width: 100%;
+    background: none;
+    cursor: pointer;
+    padding: 18px;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    border: none;
+}
+
+.panel {
+    margin: 10px 30px;
+    display: none;
+    overflow: hidden;
+    border: 2px solid rgb(9, 18, 107);
+    border-radius: 25px;
+}
+
+.panel_content {
+    margin: 20px;
+    border: 2px solid rgb(71, 71, 71);
+    border-radius: 25px;
+    
+}
+
+
+.accordion:after {
+    content: '\25BC'; /* Символ юникода для "плюса" знак (+) */
+    font-size: 18px;
+    color: #000000;
+    float: right;
+    margin-left: 5px;
+}
+
+.accordion_pizza:after {
+    content: '\25BC'; /* Символ юникода для "плюса" знак (+) */
+    font-size: 18px;
+    color: #000000;  
+    float: right;
+    margin-left: 5px;
+}
+
+.accordion.active:after {
+    content: "\25B2	";/* Символ юникода для "минуса" знак (-) */
+}
+
+.accordion_pizza.active:after {
+    content: "\25B2	";/* Символ юникода для "минуса" знак (-) */
+}
+
+.panel_pizza {
+    border-top: 2px solid rgb(201, 201, 201);
+    display: none;
+    overflow: hidden;
+    padding: 20px 40px 20px 40px;
+}
+
+.panel_pizza p {
+    color: rgb(2, 2, 2);
+    text-align: justify;
+}
+
+.content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 10px auto;
+    border-radius: 35px;
+    padding: 10px 20px 20px;
+}
+
+@media screen and (max-width: 1200px){
+    .content{
+        width: 960px;
+    }
+
+    .info_content_img img {
+        width: 480px;
+    }
+
+    .info_content_img {
+        gap: 2px;
+    }
+
+    .info_content_img_food {
+        gap: 2px;
+    }
+
+    .info_content_img_food img {
+        width: 478px;
+    }
+}
+@media screen and (max-width: 992px){
+.kontact_content {
+    display: block;
+}
+.kontact_content_title {
+    font-size: 20px;
+}
+
+.kontact_content_subtitle {
+    font-size: 14px;
+}
+iframe {
+    width: 720px;
+}
+
+.content{
+    width: 720px;
+}
+
+.info_content_img img {
+    width: 358px;
+}
+
+.info_content_img {
+    gap: 2px;
+}
+
+.info_content_img_food {
+    gap: 2px;
+}
+
+.info_content_img_food img {
+    width: 358px;
+}
+}
+@media screen and (max-width: 768px){
+    .kontact_content {
+        display: block;
+    }
+    .kontact_content_title {
+        font-size: 20px;
+    }
+    
+    .kontact_content_subtitle {
+        font-size: 14px;
+    }
+    iframe {
+        width: 540px;
+        height: 270px;
+    }
+
+    .section_sostav_title {
+        font-size: 24px;
+    }
+
+    .content{
+        width: 540px;
+    }
+
+    .info_content_img img {
+        width: 268px;
+    }
+
+    .info_content_img {
+        gap: 2px;
+    }
+
+    .info_content_img_food {
+        gap: 2px;
+    }
+
+    .info_content_img_food img {
+        width: 268px;
+    }
+}
+@media screen and (max-width: 576px){
+    .section_kontact_title {
+        font-size: 24px;
+        padding-left: 5px;
+    }
+    
+    .kontact_content {
+        display: block;
+    }
+    .kontact_content_title {
+        font-size: 16px;
+    }
+
+    .kontact_content_subtitle a {
+        font-size: 12px;
+    }
+    
+    .kontact_content_subtitle {
+        font-size: 12px;
+    }
+
+    .kontact_content_time{
+        font-size: 12px;
+    }
+    iframe {
+        width: 310px;
+        height: 155px;
+    }
+    .section_sostav_title{
+        font-size: 20px;
+    }
+    .sostav_text_content p {
+        font-size: 14px;
+    }
+    .content{
+        width: 320px;
+    }
+
+    .info_content_img img {
+        width: 310px;
+    }
+
+    .info_content_img {
+        gap: 2px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .info_content_img_food {
+        gap: 2px;
+        justify-content: center;
+    }
+
+    .info_content_img_food img {
+        width: 310px;
+    }
+}
