@@ -7,6 +7,7 @@ $database = 'dimoa';
 
 $connect = mysqli_connect($hostName,$username,$password,$database);
 
+
 if ($connect == false)
 {
     echo "Ошибка подключения";

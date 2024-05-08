@@ -29,6 +29,11 @@
         <input type="password" name="password" placeholder="Введите проль" >
         <button type="submit">ВХОД</button>
     </form>
+
+    <?php if(isset($_SESSION['message'])): ?>
+        <div class="error-message"><?php echo $_SESSION['message']; ?></div>
+        <?php unset($_SESSION['message']); ?>
+    <?php endif; ?>
 </div>
 </body>
 </html>

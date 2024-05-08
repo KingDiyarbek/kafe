@@ -83,6 +83,7 @@ $tovar = mysqli_fetch_assoc($tovar);
     <div class="update_content">
         <form action="../config/update_tovar.php" method="post"  enctype="multipart/form-data">
             <input type="hidden" name="id_tovar" value="<?= $tovar['idMenu']?>">
+            <input type="hidden" name="id_category" value="<?= $tovar['Category_idCategory']?>">
             <label for="Name">Название</label>
             <input type="text" name="Name" value="<?= $tovar['Name']?>">
             <label for="Price" >Цена</label>

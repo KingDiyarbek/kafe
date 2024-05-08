@@ -3,7 +3,11 @@ require_once '../config/connect.php';
 session_start();
 $id_tovar = $_GET['id'];
 $result_sidebar = mysqli_query($connect, query:'SELECT * FROM `category`');
-$create_tovar = mysqli_query($connect, query:"SELECT * FROM `menu` WHERE `Category_idcategory`= '$id_tovar'");
+$category = mysqli_query($connect, "SELECT * FROM `category` WHERE `idCategory` = '$id_tovar'");
+$categor = mysqli_fetch_assoc($category);
+
+
+$create_tovar = mysqli_query($connect, "SELECT menu.*, img.File FROM menu INNER JOIN img ON menu.Image = img.id WHERE menu.Category = '$id_tovar'");
 if (!isset($_SESSION['admin'])) {
     header('Location: ../admin.php');
 }
@@ -96,7 +100,7 @@ if (!isset($_SESSION['admin'])) {
                     <div class="menu_card">
                         <div class="container_1">
                             <div class="wrapper">
-                                <div class="banner-image"><img src="<?= $tovar['Image'] ?>" alt=""></div>
+                                <div class="banner-image"><img src="<?= $tovar['File'] ?>" alt=""></div>
                                 <h3><?= $tovar['Name']; ?></h3>
                                 <p><?= $tovar['Description']; ?></p>
                             </div>
@@ -122,10 +126,12 @@ if (!isset($_SESSION['admin'])) {
         <div class="content_create_tovar"> 
             <form action="../config/create_tovar.php" method="post"  enctype="multipart/form-data">
                 <input type="hidden" name="id_category" value="<?= $id_tovar ?>">
+                <input type="hidden" name="name_category" value="<?= htmlspecialchars($categor['Name_category']) ?>">
                 <input type="text" name="Name" placeholder="Названия">
                 <input type="text" name="Price" placeholder="Цена">
-                <textarea  name="Description" placeholder="Названия"></textarea>
-                
+                <textarea  name="Description" placeholder="Описание"></textarea>
+                <textarea  name="Sostav" placeholder="Состав"></textarea>
+                <input type="text" name="Weight" placeholder="Вес">
                 <input type="file" name="file">
                 <button type="submit">Добавить</button>
             </form>

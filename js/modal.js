@@ -169,6 +169,11 @@ const modals = [
   modal: '.modal_food4',
   btnOpen: '.info_content_img_food4',
   btnClose: '.modal__close_img',
+},
+{
+  modal: '.create',
+  btnOpen: '.create_category',
+  btnClose: '.modal__close',
 }
 ];
 

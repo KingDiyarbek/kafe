@@ -43,7 +43,10 @@ $categories = mysqli_fetch_all($listCategory, MYSQLI_ASSOC);
                             </li>
 						</ul>
 					</nav>
-                    <div class="corzina"><img class="corzina_open" src="image/shopping-basket-wight1.svg" alt=""></div>
+                    <div class="corzina">
+                        <img class="corzina_open" src="image/shopping-basket-wight1.svg" alt="">
+                        <span class="corzina_kol">0</span>
+                    </div>
 				</div>
 			</div>
 </header>
@@ -54,7 +57,7 @@ $categories = mysqli_fetch_all($listCategory, MYSQLI_ASSOC);
                 <div class="product_name">Товар</div>
                 <div class="product_price">Цена</div>
                 <div class="product_quality">Количество</div>
-                <div class="product_itogo">Общая цена</div>
+                <div class="product_itogo">Итого</div>
                 <div class="product_delete">Удалить</div>
             </div>
             <div class="smart_basket"></div>
@@ -72,18 +75,26 @@ $categories = mysqli_fetch_all($listCategory, MYSQLI_ASSOC);
 
             </div>
             
-            <form method="post" action="save_order.php">
+            <form method="post" action="config/zakaz.php" id="checkoutForm">
                 <div class="checkout-form">
                     <h2>Оформление заказа</h2>
-                    <input type="text" name="fullName" placeholder="ФИО">
-                    <input type="text" name="address" placeholder="Адрес">
-                    <input type="text" name="phone" placeholder="Телефон">
-                    <input type="hidden" name="total" class="total" value="0">
+                    <input type="text" name="fullName" id="fullName" placeholder="ФИО" required>
+                    <input type="text" name="address" id="address" placeholder="Адрес" required>
+                    <input type="tel" name="phone" id="phone" placeholder="Телефон" required>
                     <!-- Скрытое поле для передачи общей суммы заказа -->
-                    <button type="submit">Оформить заказ</button>
+                    <input type="hidden" name="total" id="total" value="">
+                    <button type="submit" id="submitBtn">Оформить заказ</button>
                 </div>
             </form>
+
+            <div id="orderConfirmationModal" class="Modal_thanks">
+                <div class="Modal_thanks-content">
+                    <h2>Заказ принят</h2>
+                    <p>Спасибо за ваш заказ!</p>
+                </div>
+            </div>
         </div>
+        <button class="corzina__close">&#10006;</button>
     </div>
 
 <section class="section_info">

@@ -3,7 +3,7 @@ session_start();
 require_once '../config/connect.php';
 $id = $_GET['id'];
 $result_sidebar = mysqli_query($connect, query:'SELECT * FROM `category`');
-$aksiya = mysqli_query($connect, query:"SELECT * FROM `aksi` WHERE `idAksi`= '$id'");
+$aksiya = mysqli_query($connect, query:"SELECT aksii.*, img.* FROM aksii INNER JOIN img ON aksii.Image = img.id WHERE `idAksiya`= '$id'");
 $aksiya = mysqli_fetch_assoc($aksiya);
 ?>
 
@@ -88,14 +88,15 @@ $aksiya = mysqli_fetch_assoc($aksiya);
 <div class="update">
     <div class="update_content">
         <form action="../config/update_aksi.php" method="post"  enctype="multipart/form-data">
-            <input type="hidden" name="id_aksiya" value="<?= $aksiya['idAksi']?>">
+            <input type="hidden" name="id_aksiya" value="<?= $aksiya['idAksiya']?>">
             <label for="Name">Название</label>
             <input type="text" name="Name" value="<?= $aksiya['Name']?>">
             <label for="Date" >Дата</label>
-            <input type="date" name="Data" value="<?= $aksiya['Data']?>">
+            <input type="date" name="Data" value="<?= $aksiya['Date']?>">
             <label for="Description">Описание</label>
             <textarea name="Description"><?= $aksiya['Description']?></textarea>
-            <input type="file" name="file"><img src="<?= $aksiya['Image']?>" alt="">
+            <input type="text" name="idFile" value="<?= $aksiya['id']?>">
+            <input type="file" name="file"><img src="<?= $aksiya['File']?>" alt="">
             <button class="button_update"><span>Изменить</span></button>
         </form>
     </div>

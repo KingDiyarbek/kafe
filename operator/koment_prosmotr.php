@@ -24,12 +24,20 @@ $komentariya = mysqli_fetch_assoc($komentariya);
             </div>
             <ul class="nav-links">
                 <li>
-                    <a href="">
-                        <i class='bx bx-briefcase-alt-2'></i>
-                        <span class="link_name">Заказы</span>
-                    </a>
-                    <ul class="sub-menu blank">
-                        <li><a class="link_name" href="">Заказы</a></li>
+                    <div class="iocn-link">
+                        <a href="#">
+                            <i class='bx bx-briefcase-alt-2'></i>    
+                            <span class="link_name">Закзы</span>
+                        </a>
+                        <i class="bx bxs-chevron-down arrow"></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Заказы</a>
+                            <ul>
+                                <li><a href="zakaz.php">Новые</a></li>
+                                <li><a href="all_zakaz.php">Прочитанные</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -43,8 +51,8 @@ $komentariya = mysqli_fetch_assoc($komentariya);
                     <ul class="sub-menu">
                         <li><a class="link_name" href="#">Комментарии</a>
                             <ul>
-                                <li><a href="">Новые</a></li>
-                                <li><a href="">Прочитанные</a></li>
+                                <li><a href="komentariya.php">Новые</a></li>
+                                <li><a href="all_koment.php">Прочитанные</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -78,11 +86,18 @@ $komentariya = mysqli_fetch_assoc($komentariya);
             <h3><?= $komentariya['email'] ?></h3>
             <h2>Комментария</h2>
             <p><?= $komentariya['komentariya'] ?></p>
-            <h2>Файл</h2>
-            <img src="<?= $komentariya['File'] ?>" alt="">
+            <?php if (!empty($komentariya['File']) && pathinfo($komentariya['File'], PATHINFO_EXTENSION) == 'jpg'): ?>
+        <h2>Фото</h2>
+        <img src="<?= $komentariya['File'] ?>" alt="">
+        <?php endif; ?>
+        
+        <!-- Проверяем наличие файла видео -->
+        <?php if (!empty($komentariya['File']) && pathinfo($komentariya['File'], PATHINFO_EXTENSION) == 'mp4'): ?>
+            <h2>Видео</h2>
             <video controls="controls" src="<?= $komentariya['File'] ?>"></video>
-            <button type="submit">Прочитано</button>
-        </form>
+        <?php endif; ?>
+                <button type="submit">Прочитано</button>
+            </form>
     </div>
 
 </div>

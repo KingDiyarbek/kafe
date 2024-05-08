@@ -87,6 +87,9 @@ img {
 }
 
 .card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #231E39;
     border-radius: 5px;
     box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
@@ -115,7 +118,9 @@ img {
     padding: 20px 0;
     }
     .skills {
-    margin-top: 15px;
+        margin-top: auto; /* Размещаем блок .skills внизу */
+        display: flex;
+        gap: 10px;
     padding-bottom: 40px;
     }
     .primary {
@@ -174,24 +179,30 @@ img {
     }
     
     .content_create_user form input {
-    padding: 10px;
-    border-radius: 20px;
-    margin-top: 10px;
-    }
-    
-    
-    .content_create_user form button {
-    width: 100%;
-    max-width: 250px;
-    margin-top: 10px;
-    background: #033349;
-    transition: all .3s linear;
-    }
-    
-    .content_create_user form button:hover{
-    transform: none;
-    background: red;
-    }
+        padding: 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        border: 2px solid rgba(255, 0, 0, 0.5);
+      }
+      
+      .content_create_user form textarea {
+        padding: 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+      }
+      
+      .content_create_user form button {
+        width: 100%;
+        max-width: 250px;
+        margin-top: 10px;
+        background: #033349;
+        transition: all .3s linear;
+      }
+      
+      .content_create_user form button:hover{
+        transform: none;
+        background: red;
+      }
 
     
     @media screen and (min-width: 992px) and (max-width: 1200px) {

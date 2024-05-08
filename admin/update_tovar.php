@@ -3,7 +3,7 @@ session_start();
 require_once '../config/connect.php';
 $id = $_GET['id'];
 $result_sidebar = mysqli_query($connect, query:'SELECT * FROM `category`');
-$tovar = mysqli_query($connect, query:"SELECT * FROM `menu` WHERE `idMenu`= '$id'");
+$tovar = mysqli_query($connect, query:"SELECT menu.*, category.Name_category, img.* FROM menu INNER JOIN category ON menu.Category = category.idCategory LEFT JOIN img ON menu.Image = img.id WHERE  menu.`idMenu`= '$id'");
 $tovar = mysqli_fetch_assoc($tovar);
 if (!isset($_SESSION['admin'])) {
     header('Location: ../admin.php');
@@ -90,18 +90,22 @@ if (!isset($_SESSION['admin'])) {
     </section>
 <div class="update">
     <div class="update_content">
-        <form action="../config/update_tovar.php" method="post"  enctype="multipart/form-data">
-            <input type="hidden" name="id_tovar" value="<?= $tovar['idMenu']?>">
-            <input type="hidden" name="id_category" value="<?= $tovar['Category_idCategory']?>">
-            <label>Название</label>
-            <input type="text" name="Name" value="<?= $tovar['Name']?>">
-            <label>Цена</label>
-            <input type="text" name="Price" value="<?= $tovar['Price']?>">
-            <label>Описание</label>
-            <textarea name="Description"><?= $tovar['Description']?></textarea>
-            <input type="file" name="file"><img src="<?= $tovar['Image']?>" alt="">
-            <button class="button_update"><span>Изменить</span></button>
-        </form>
+    <form action="../config/update_tovar.php" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id_tovar" value="<?= $tovar['idMenu']?>">
+    <input type="hidden" name="id_category" value="<?= $tovar['Category']?>">
+    <input type="hidden" name="name_category" value="<?= $tovar['Name_category']?>">
+    <label>Название</label>
+    <input type="text" name="Name" value="<?= $tovar['Name']?>">
+    <label>Цена</label>
+    <input type="text" name="Price" value="<?= $tovar['Price']?>">
+    <label>Описание</label>
+    <textarea name="Description"><?= $tovar['Description']?></textarea>
+    <input type="text" name="Weight" value="<?= $tovar['Weight']?>">
+    <input type="hidden" name="idFile" value="<?= $tovar['id']?>">
+    <input type="file" name="file"><img src="<?= $tovar['File']?>" alt="">
+    <button class="button_update" name="submit"><span>Изменить</span></button>
+</form>
+
     </div>
 
 </div>

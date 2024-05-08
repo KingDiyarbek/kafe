@@ -25,12 +25,12 @@ if (!isset($_SESSION['user'])) {
         </div>
         <ul class="nav-links">
             <li>
-                <a href="">
+                <a href="profile.php">
                     <i class='bx bxs-offer'></i>
                     <span class="link_name">Акции</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="">Акции</a></li>
+                    <li><a class="link_name" href="profile.php">Акции</a></li>
                 </ul>
             </li>
             <li>
@@ -96,7 +96,7 @@ if (!isset($_SESSION['user'])) {
                             </div>
 
                             <form class="button-wrapper">
-                                <a href="config/delete_tovar.php?id=<?= $tovar['idMenu'] ?>"><img class="delete" src="../image/profile/delete.png" alt=""></a>
+                                <a href="../config/delete_tovar.php?id=<?= $tovar['idMenu'] ?>"><img class="delete" src="../image/profile/delete.png" alt=""></a>
                                 <a class="setup_tovar" href="update_tovar.php?id=<?= $tovar['idMenu'] ?>">Изменить</a>
                             </form>
                         </div>
@@ -114,7 +114,7 @@ if (!isset($_SESSION['user'])) {
     <div class="container_create_tovar">
         <h1>Добавление товара</h1>
         <div class="content_create_tovar"> 
-            <form action="config/create_tovar.php" method="post"  enctype="multipart/form-data">
+            <form action="../config/create_tovar.php" method="post"  enctype="multipart/form-data">
                 <input type="text" name="Name" placeholder="Названия">
                 <input type="text" name="Price" placeholder="Цена">
                 <textarea  name="Description" placeholder="Названия"></textarea>

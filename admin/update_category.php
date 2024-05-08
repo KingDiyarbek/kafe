@@ -3,7 +3,7 @@ session_start();
 require_once '../config/connect.php';
 $id = $_GET['id'];
 $result_sidebar = mysqli_query($connect, query:'SELECT * FROM `category`');
-$category = mysqli_query($connect, query:"SELECT * FROM `category` WHERE `idCategory` = '$id'");
+$category = mysqli_query($connect, query:"SELECT category.*, img.* FROM category INNER JOIN img ON category.Image = img.id WHERE category.`idCategory` = '$id'");
 $category = mysqli_fetch_assoc($category);
 ?>
 
@@ -87,10 +87,12 @@ $category = mysqli_fetch_assoc($category);
     </section>
 <div class="update">
     <div class="update_content">
-        <form action="config/update_category.php" method="post"  enctype="multipart/form-data">
+        <form action="../config/update_category.php" method="post"  enctype="multipart/form-data">
             <input type="hidden" name="id_category" value="<?= $category['idCategory']?>">
             <label for="Name">Название</label>
             <input type="text" name="Name" value="<?= $category['Name_category']?>">
+            <input type="hidden" name="idFile" value="<?= $category['id']?>">
+            <input type="file" name="file"><img src="<?= $category['File']?>" alt="">
             <button class="button_update"><span>Изменить</span></button>
         </form>
     </div>

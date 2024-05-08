@@ -3,7 +3,7 @@ session_start();
 require_once '../config/connect.php';
 $result_sidebar = mysqli_query($connect, query: 'SELECT * FROM `category`');
 $result_pizza = mysqli_query($connect, query: "SELECT * FROM `menu`");
-$result_aksii = mysqli_query($connect, query: 'SELECT * FROM `aksi`');
+$result_aksii = mysqli_query($connect, query: "SELECT aksii.*, img.File FROM aksii INNER JOIN img ON aksii.Image = img.id");
 
 if (!isset($_SESSION['admin'])) {
     header('Location: ../admin.php');
@@ -95,11 +95,11 @@ if (!isset($_SESSION['admin'])) {
                 ?>
                     <form>
                         <div class="aksi_content">
-                            <div class="img_card"><img src="<?= $aksi['Image'] ?>" alt="">
+                            <div class="img_card"><img src="<?= $aksi['File'] ?>" alt="">
                             </div>
                             <div class="aksi_content_text">
                                 <div class="data">
-                                    <h3 class="data"><?= $aksi['Data'] ?></h3>
+                                    <h3 class="data"><?= $aksi['Date'] ?></h3>
                                 </div>
                                 <div class="aksi_text">
                                     <h2><?= $aksi['Name']; ?></h2>
@@ -111,8 +111,8 @@ if (!isset($_SESSION['admin'])) {
                                 </a>
                             </div>
                             <div class="aksi_btn">
-                                <a href="../config/delete_aksi.php?id=<?= $aksi['idAksi'] ?>"><img src="../image/profile/delete.png" alt=""></a>
-                                <a class="setup_tovar" href="update_aksii.php?id=<?= $aksi['idAksi'] ?>">Изменить</a>
+                                <a href="../config/delete_aksi.php?id=<?= $aksi['idAksiya'] ?>"><img src="../image/profile/delete.png" alt=""></a>
+                                <a class="setup_tovar" href="update_aksii.php?id=<?= $aksi['idAksiya'] ?>">Изменить</a>
                             </div>
 
                         </div>
@@ -130,10 +130,10 @@ if (!isset($_SESSION['admin'])) {
         <div class="container_create_aksi">
             <h1>Добавление акции</h1>
             <div class="content_create_aksi">
-                <form action="config/create_aksi.php" method="post" enctype="multipart/form-data">
+                <form action="../config/create_aksi.php" method="post" enctype="multipart/form-data">
                     <input type="text" name="Name" placeholder="Названия">
                     <input type="date" name="Date">
-                    <textarea name="Description" placeholder="Названия"></textarea>
+                    <textarea name="Description" placeholder="Описание"></textarea>
                     <input type="file" name="file">
                     <button type="submit">Добавить</button>
                 </form>

@@ -86,6 +86,7 @@ if (!isset($_SESSION['admin'])) {
             <i class="bx bx-menu"></i>
         </div>
     </section>
+    
 <div class="update">
     <div class="container_tovar">
         <div class="update_category">
@@ -103,20 +104,21 @@ if (!isset($_SESSION['admin'])) {
                     }
                 ?>
         </div>
-        <button class="create_category">Добавит</button>
+        <button class="create_category">+</button>
     </div>
 </div>
 <div class="create">
     <div class="container_create">
         <h1>Добавление категории</h1>
-        <form action="config/create_category.php" method="post">
+        <form action="../config/create_category.php" method="post" enctype="multipart/form-data">
             <input type="text" name="Name" placeholder="Названия">
+            <input type="file" name="file">
             <button type="submit">Добавить</button>
         </form>
         <button class="modal__close">&#10006;</button>
     </div>
 </div>
 <script src="../js/swiper_menu.js"></script>
-<script src="js/profile.js"></script>
+<script src="../js/modal.js"></script>
 </body>
 </html>

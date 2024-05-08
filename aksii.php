@@ -1,6 +1,6 @@
 <?php
 require_once 'config/connect.php';
-$result_aksii = mysqli_query($connect, query:'SELECT * FROM `aksi`');
+$result_aksii = mysqli_query($connect, query:"SELECT aksii.*, img.File FROM aksii INNER JOIN img ON aksii.Image = img.id");
 $listCategory = mysqli_query($connect, query: 'SELECT * FROM `category`');
 $categories = mysqli_fetch_all($listCategory, MYSQLI_ASSOC);
 ?>
@@ -42,7 +42,10 @@ $categories = mysqli_fetch_all($listCategory, MYSQLI_ASSOC);
                             </li>
 						</ul>
 					</nav>
-                    <div class="corzina"><img class="corzina_open" src="image/shopping-basket-wight1.svg" alt=""></div>
+                    <div class="corzina">
+                        <img class="corzina_open" src="image/shopping-basket-wight1.svg" alt="">
+                        <span class="corzina_kol">0</span>
+                    </div>
 				</div>
 			</div>
 </header>
@@ -53,7 +56,7 @@ $categories = mysqli_fetch_all($listCategory, MYSQLI_ASSOC);
                 <div class="product_name">Товар</div>
                 <div class="product_price">Цена</div>
                 <div class="product_quality">Количество</div>
-                <div class="product_itogo">Общая цена</div>
+                <div class="product_itogo">Итого</div>
                 <div class="product_delete">Удалить</div>
             </div>
             <div class="smart_basket"></div>
@@ -71,18 +74,26 @@ $categories = mysqli_fetch_all($listCategory, MYSQLI_ASSOC);
 
             </div>
             
-            <form method="post" action="save_order.php">
+            <form method="post" action="config/zakaz.php" id="checkoutForm">
                 <div class="checkout-form">
                     <h2>Оформление заказа</h2>
-                    <input type="text" name="fullName" placeholder="ФИО">
-                    <input type="text" name="address" placeholder="Адрес">
-                    <input type="text" name="phone" placeholder="Телефон">
-                    <input type="hidden" name="total" class="total" value="0">
+                    <input type="text" name="fullName" id="fullName" placeholder="ФИО" required>
+                    <input type="text" name="address" id="address" placeholder="Адрес" required>
+                    <input type="tel" name="phone" id="phone" placeholder="Телефон" required>
                     <!-- Скрытое поле для передачи общей суммы заказа -->
-                    <button type="submit">Оформить заказ</button>
+                    <input type="hidden" name="total" id="total" value="">
+                    <button type="submit" id="submitBtn">Оформить заказ</button>
                 </div>
             </form>
+
+            <div id="orderConfirmationModal" class="Modal_thanks">
+                <div class="Modal_thanks-content">
+                    <h2>Заказ принят</h2>
+                    <p>Спасибо за ваш заказ!</p>
+                </div>
+            </div>
         </div>
+        <button class="corzina__close">&#10006;</button>
     </div>
 
 <section class="section_aksi">
@@ -101,14 +112,14 @@ $categories = mysqli_fetch_all($listCategory, MYSQLI_ASSOC);
                 {
                     ?>
                     <form action="aksiya_info.php">
-                        <a href="aksiya_info.php?id=<?= $aksi['idAksi'] ?>">
+                        <a href="aksiya_info.php?id=<?= $aksi['idAksiya'] ?>">
                             <div class="aksi_content">
-                                <div class="img_card"><img  src="<?= $aksi['Image'] ?>" alt="">
-                                    <a href="aksiya_info.php?id=<?= $aksi['idAksi'] ?>" class="button_red">Подробнее</a>
+                                <div class="img_card"><img  src="<?= $aksi['File'] ?>" alt="">
+                                    <a href="aksiya_info.php?id=<?= $aksi['idAksiya'] ?>" class="button_red">Подробнее</a>
                                 </div>
-                                <div class="aksi_content_text"><a href="aksiya_info.php?id=<?= $aksi['idAksi'] ?>">
+                                <div class="aksi_content_text"><a href="aksiya_info.php?id=<?= $aksi['idAksiya'] ?>">
                                     <div class="data">
-                                        <h3 class="data"><?= $aksi['Data']; ?></h3>
+                                        <h3 class="data"><?= $aksi['Date']; ?></h3>
                                     </div>
                                     <div class="aksi_text">
                                         <h2><?= $aksi['Name']; ?></h2>
@@ -127,6 +138,7 @@ $categories = mysqli_fetch_all($listCategory, MYSQLI_ASSOC);
         </div>
     </div>
 </div>
+
 <div class="komentariya">
     <div class="komentariya_content">
         <img src="image/komentariya/icons.png" alt="">

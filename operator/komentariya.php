@@ -23,13 +23,22 @@ if (!isset($_SESSION['operator'])) {
             </div>
             <ul class="nav-links">
                 <li>
-                    <a href="">
-                        <i class='bx bx-briefcase-alt-2'></i>
-                        <span class="link_name">Заказы</span>
-                    </a>
-                    <ul class="sub-menu blank">
-                        <li><a class="link_name" href="">Заказы</a></li>
+                    <div class="iocn-link">
+                        <a href="#">
+                            <i class='bx bx-briefcase-alt-2'></i>    
+                            <span class="link_name">Закзы</span>
+                        </a>
+                        <i class="bx bxs-chevron-down arrow"></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Заказы</a>
+                            <ul>
+                                <li><a href="zakaz.php">Новые</a></li>
+                                <li><a href="all_zakaz.php">Прочитанные</a></li>
+                            </ul>
+                        </li>
                     </ul>
+                </li>
                 </li>
                 <li>
                     <div class="iocn-link">
@@ -42,8 +51,8 @@ if (!isset($_SESSION['operator'])) {
                     <ul class="sub-menu">
                         <li><a class="link_name" href="#">Комментарии</a>
                             <ul>
-                                <li><a href="">Новые</a></li>
-                                <li><a href="">Прочитанные</a></li>
+                                <li><a href="komentariya.php">Новые</a></li>
+                                <li><a href="all_koment.php">Прочитанные</a></li>
                             </ul>
                         </li>
                     </ul>

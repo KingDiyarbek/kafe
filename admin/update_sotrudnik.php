@@ -3,7 +3,7 @@ session_start();
 require_once '../config/connect.php';
 $idUser = $_GET['idUser']; 
 $result_sidebar = mysqli_query($connect, query:'SELECT * FROM `category`');
-$user = mysqli_query($connect, query:"SELECT * FROM `user` WHERE `idUser` = '$idUser'");
+$user = mysqli_query($connect, query:"SELECT user.*, img.* FROM user INNER JOIN img ON user.Image = img.id WHERE user.`idUser` = '$idUser'");
 $user = mysqli_fetch_assoc($user);
 if (!isset($_SESSION['admin'])) {
     header('Location: admin.php');
@@ -97,12 +97,14 @@ if (!isset($_SESSION['admin'])) {
             <input type="text" name="Name" value="<?= $user['Name']?>">
             <label for="Patronymic">Очество</label>
             <input type="text" name="Patronymic" value="<?= $user['Patronymic'] ?>">
+            <input type="text" name="Post" value="<?= $user['Post'] ?>">
             <label for="login">Логин</label>
             <input type="text" name="login" value="<?= $user['login'] ?>">
             <label for="password">Пароль</label>
             <input type="text" name="password" value="<?= $user['password'] ?>">
-            <img src="<?= $user['Image'] ?>" alt="">
-            <input type="file" name="file" value="<?= $user['Image']?>">
+            <img src="<?= $user['File'] ?>" alt="">
+            <input type="hidden" name="idFile" value="<?= $user['id']?>">
+            <input type="file" name="file" value="<?= $user['File']?>">
             <button class="button_update"><span>Изменить</span></button>
         </form>
     </div>

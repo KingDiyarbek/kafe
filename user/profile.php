@@ -107,7 +107,7 @@ if (!isset($_SESSION['user'])) {
                                 </a>
                             </div>
                             <div class="aksi_btn">
-                                <a href="config/delete_aksi.php?id=<?= $aksi['idAksi'] ?>"><img src="image/profile/delete.png" alt=""></a>
+                                <a href="config/delete_aksi.php?id=<?= $aksi['idAksi'] ?>"><img src="../image/profile/delete.png" alt=""></a>
                                 <a class="setup_tovar" href="update_aksii.php?id=<?= $aksi['idAksi'] ?>">Изменить</a>
                             </div>
 

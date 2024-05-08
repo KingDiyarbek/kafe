@@ -1,15 +1,17 @@
 <?php
 require_once 'config/connect.php';
 $listCategory = mysqli_query($connect, query: 'SELECT * FROM `category`');
+$mobileMenu = mysqli_query($connect, query: "SELECT category.*, img.* FROM category INNER JOIN img ON category.Image = img.id");
 $categories = mysqli_fetch_all($listCategory, MYSQLI_ASSOC);
-$menuItems = mysqli_query($connect, "SELECT menu.*, category.Name_category FROM menu INNER JOIN category ON menu.Category_idCategory = category.idCategory");
+$menuItems = mysqli_query($connect, "SELECT menu.*, category.Name_category, img.File FROM menu INNER JOIN category ON menu.Category = category.idCategory LEFT JOIN img ON menu.Image = img.id;
+");
 $menuItems = mysqli_fetch_all($menuItems, MYSQLI_ASSOC);
 $menuByCategory = [];
 foreach ($menuItems as $menuItem) {
     $categoryName = $menuItem['Name_category'];
     $menuByCategory[$categoryName][] = $menuItem;
 }
-$result_aksii = mysqli_query($connect, query:'SELECT * FROM `aksi`');
+$result_aksii = mysqli_query($connect, query:"SELECT aksii.*, img.File FROM aksii INNER JOIN img ON aksii.Image = img.id");
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -106,6 +108,11 @@ $result_aksii = mysqli_query($connect, query:'SELECT * FROM `aksi`');
                     <input type="text" name="fullName" id="fullName" placeholder="ФИО" required>
                     <input type="text" name="address" id="address" placeholder="Адрес" required>
                     <input type="tel" name="phone" id="phone" placeholder="Телефон" required>
+                    <textarea name="komentariya" id="" cols="30" rows="3" style="height: 100px;" placeholder="Комментария"></textarea>
+                    <label class="cl-checkbox">
+                        <input checked="" type="checkbox">
+                        <span>Даю согласия на обработку персональных данных</span>
+                    </label>
                     <!-- Скрытое поле для передачи общей суммы заказа -->
                     <input type="hidden" name="total" id="total" value="">
                     <button type="submit" id="submitBtn">Оформить заказ</button>
@@ -125,7 +132,7 @@ $result_aksii = mysqli_query($connect, query:'SELECT * FROM `aksi`');
     <section class="section">
         <div class="container">
             <div class="section_header">
-                <h2 class="section_title">Наши Акции</h2>
+                <h2 class="section_title" id="aksii_title">Наши Акции</h2>
             </div>
         </div>
     </section>
@@ -133,12 +140,30 @@ $result_aksii = mysqli_query($connect, query:'SELECT * FROM `aksi`');
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
         <?php foreach ($result_aksii as $aksii) : ?>
-            <div class="swiper-slide"><img src="<?= $aksii['Image'] ?>" alt=""></div>
+            <div class="swiper-slide"><img src="<?= $aksii['File'] ?>" alt=""></div>
         <?php endforeach; ?>
         </div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
         <div class="swiper-pagination"></div>
+    </div>
+
+
+    <div class="mobile_menu">
+        <div class="container">
+            <div class="mobile_menu_content">
+            <?php
+                while ($menu_mobile = mysqli_fetch_assoc($mobileMenu)) {
+                ?>
+                <div class="category">
+                    <img src="<?= $menu_mobile['File'] ?>" alt="">
+                    <a href="#<?= $menu_mobile['idCategory'] ?>"><?= $menu_mobile['Name_category'] ?></a>
+                </div>
+                <?php
+                }
+                ?>
+            </div>
+        </div>
     </div>
 
     <section class="section">
@@ -304,7 +329,7 @@ $result_aksii = mysqli_query($connect, query:'SELECT * FROM `aksi`');
                         <div class="menu_card">
                             <div class="container_1">
                                 <div class="wrapper">
-                                    <div class="banner-image"><img src="<?= $menuItem['Image'] ?>" alt=""></div>
+                                    <div class="banner-image"><img src="<?= $menuItem['File'] ?>" alt=""></div>
                                     <h3><?= $menuItem['Name'] ?></h3>
                                     <p><?= $menuItem['Description'] ?></p>
                                     <h4 class="weight"><?= $menuItem['Weight'] ?></h4>
@@ -318,7 +343,7 @@ $result_aksii = mysqli_query($connect, query:'SELECT * FROM `aksi`');
                                     data-sb-product-name="<?= $menuItem['Name'] ?>"
                                     data-sb-product-price="<?= $menuItem['Price'] ?>"
                                     data-sb-product-quantity="1"
-                                    data-sb-product-img="<?= $menuItem['Image'] ?>" type="submit">Выбрать</a>
+                                    data-sb-product-img="<?= $menuItem['File'] ?>" type="submit">Выбрать</a>
                                 </form>
                             </div>
                         </div>
@@ -351,7 +376,11 @@ $result_aksii = mysqli_query($connect, query:'SELECT * FROM `aksi`');
                         <input type="text" name="name" class="feedback-input" placeholder="Имя" />
                         <input type="text" name="email" class="feedback-input" placeholder="Email или телефон номер" />
                         <textarea name="komentariya" class="feedback-input" placeholder="Комментария"></textarea>
-                        <input type="file" name="file" class="feedback-input">
+                        <input type="file" name="files[]" class="feedback-input" multiple>
+                        <label class="cl-checkbox">
+                            <input checked="" type="checkbox">
+                            <span>Даю согласия на обработку персональных данных</span>
+                        </label>
                         <input type="submit" value="Отправить" />
                         
                     </form>
@@ -444,6 +473,10 @@ $result_aksii = mysqli_query($connect, query:'SELECT * FROM `aksi`');
             <h3>&#169; Dimoa 2024</h3>
         </div>
     </div>
+    <div id="cookie-banner">
+        <p>Мы используем файлы cookie на нашем сайте, чтобы обеспечить наилучший опыт для вас. Продолжая использовать этот сайт, вы соглашаетесь на использование файлов cookie.</p>
+        <button id="accept-cookies-btn">Принять</button>
+    </div>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" crossorigin="anonymous"></script>
     <script src="js/menu.js"></script>
     <script src="js/modal.js"></script>
@@ -455,6 +488,7 @@ $result_aksii = mysqli_query($connect, query:'SELECT * FROM `aksi`');
     <script src="js/swiper.js"></script>
 
     <script src="js/cart.js"></script>
+    <script src="js/file cooki.js"></script>
 
     
     <script>
@@ -476,9 +510,6 @@ $result_aksii = mysqli_query($connect, query:'SELECT * FROM `aksi`');
         });
     </script>
 
-<script>
-
-    </script>
     
 </body>
 
